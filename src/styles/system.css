@@ -2097,3 +2097,28 @@ html body .admin-ov-row b {
 @media (max-width: 900px) {
   html body .admin-ov-grid { grid-template-columns: 1fr !important; }
 }
+
+/* Менюи мобилӣ: қоидаи болоии `html body .main-nav { display:flex !important }`
+   панелро дар телефон ҳамеша боз мегузошт. Дар экрани хурд танҳо бо .is-open. */
+@media (max-width: 680px) {
+  html body .nav-shell { position: relative !important; }
+  html body .main-nav {
+    display: none !important;
+    flex: 0 0 auto !important;
+  }
+  html body .main-nav.is-open {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 2px !important;
+  }
+  html body .main-nav > a {
+    width: 100% !important;
+    height: auto !important;
+    justify-content: flex-start !important;
+    padding: 13px 14px !important;
+    font-size: 13px !important;
+  }
+}

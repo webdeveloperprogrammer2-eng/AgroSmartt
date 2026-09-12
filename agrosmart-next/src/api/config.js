@@ -1,2 +1,3 @@
-// Суроғаи асосии json-server. Агар сервер дар порти дигар кор кунад, ҳамин ҷоро иваз кунед.
-export const BASE_URL = "http://localhost:8000";
+// Суроғаи асосии backend (Render). Барои кори маҳаллӣ NEXT_PUBLIC_API_URL-ро танзим кунед.
+export const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://agrosmart-server.onrender.com";
