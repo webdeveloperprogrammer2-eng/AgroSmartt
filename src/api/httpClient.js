@@ -3,7 +3,7 @@ import { BASE_URL } from "./config";
 // Сервер дар Render-и ройгон пас аз чанд дақиқа бекорӣ хоб меравад ва
 // дархости аввал метавонад 30-60 сония кашад ё тамоман афтад ("Failed to fetch").
 // Барои ҳамин ҳар дархостро бо timeout мепечонем ва ҳангоми хатои шабака такрор мекунем.
-const TIMEOUT_MS = 25000;
+const TIMEOUT_MS = 60000;
 const RETRIES = 2;
 const RETRY_DELAY_MS = 1500;
 
@@ -88,4 +88,10 @@ export function createResourceClient(resource) {
       return parseOrThrow(res, `Хатогӣ ҳангоми несткунии сабт дар ${resource}`);
     },
   };
+}
+
+// Сервери ройгони Render баъди бекорӣ хоб меравад ва дархости аввал 30-60 сония мекашад.
+// Ҳангоми кушодани сайт онро фавран бедор мекунем, то вақти сабти ном тайёр бошад.
+export function warmUpServer() {
+  fetch(`${BASE_URL}/users`, { method: "HEAD" }).catch(() => {});
 }
