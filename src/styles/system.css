@@ -2122,3 +2122,140 @@ html body .admin-ov-row b {
     font-size: 13px !important;
   }
 }
+
+/* ============================================================
+   САЙҚАЛИ МОБИЛӢ — ҳамаи танзимоти телефон дар як ҷо (≤680px)
+   ============================================================ */
+@media (max-width: 680px) {
+  /* --- Асосҳо --- */
+  html body { overflow-x: hidden !important; }
+  html body :is(img, svg, video, canvas, iframe) { max-width: 100% !important; }
+  /* 16px — то iOS ҳангоми клик сафҳаро калон накунад */
+  html body :is(input, select, textarea) { font-size: 16px !important; }
+  html body :is(button, a) { -webkit-tap-highlight-color: transparent !important; }
+
+  /* --- Сарлавҳаи Admin --- */
+  html body .admin-page > header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 40 !important;
+    gap: 8px !important;
+    padding: 9px 12px !important;
+    background: color-mix(in srgb, var(--pro-surface) 90%, transparent) !important;
+    backdrop-filter: saturate(1.4) blur(14px) !important;
+    -webkit-backdrop-filter: saturate(1.4) blur(14px) !important;
+  }
+  html body .admin-page > header > div:first-child {
+    gap: 7px !important;
+    font-size: 15px !important;
+    letter-spacing: -0.02em !important;
+  }
+  html body .admin-page > header > div:first-child svg { width: 24px !important; height: 24px !important; }
+  html body .admin-page > header > div:last-child { gap: 7px !important; }
+  html body .admin-page > header > div:last-child > span {
+    padding: 5px 9px !important;
+    font-size: 11px !important;
+  }
+  html body .admin-page > header button {
+    height: 36px !important;
+    padding: 0 11px !important;
+    font-size: 12.5px !important;
+    white-space: nowrap !important;
+  }
+  html body .admin-users-trigger { width: 36px !important; padding: 0 !important; }
+
+  /* --- Майдони асосии Admin --- */
+  html body .admin-page main {
+    gap: 14px !important;
+    padding: 14px 12px 34px !important;
+  }
+
+  /* --- KPI-ҳо: 2 сутун, на 1 сутуни дароз --- */
+  html body .admin-ov { gap: 12px !important; margin-bottom: 16px !important; }
+  html body .admin-ov-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+  }
+  html body .admin-ov-kpi {
+    gap: 2px !important;
+    padding: 12px 12px 13px !important;
+    border-radius: 14px !important;
+  }
+  html body .admin-ov-kpi-icon {
+    width: 28px !important;
+    height: 28px !important;
+    margin-bottom: 5px !important;
+    border-radius: 9px !important;
+  }
+  html body .admin-ov-kpi-icon svg { width: 15px !important; height: 15px !important; }
+  html body .admin-ov-kpi b { font-size: 22px !important; gap: 3px !important; }
+  html body .admin-ov-kpi b i { font-size: 11px !important; }
+  html body .admin-ov-kpi small {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* --- Кортҳо ва диаграммаҳои Admin --- */
+  html body .admin-ov-card { padding: 14px 13px !important; border-radius: 16px !important; }
+  html body .admin-ov-head h3 { font-size: 14px !important; }
+  html body .admin-ov-chart { height: 150px !important; gap: 7px !important; }
+  html body .admin-ov-col small { font-size: 9.5px !important; }
+  html body .admin-ov-row { gap: 8px !important; }
+  html body .admin-ov-row-label { font-size: 12px !important; }
+
+  /* --- Кортҳои ҳисоби AdminStats --- */
+  html body .admin-page main [class*="grid-cols-2"] { gap: 9px !important; }
+  html body .admin-page main [class*="grid-cols-2"] [class*="p-4"] {
+    gap: 9px !important;
+    padding: 12px !important;
+  }
+  html body .admin-page main [class*="grid-cols-2"] [class*="h-10"] {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  html body .admin-page main [class*="grid-cols-2"] [class*="text-xl"] { font-size: 19px !important; }
+
+  /* --- Саҳифаи вуруд/бақайдгирӣ --- */
+  html body .auth-page > div { padding: 18px 14px 28px !important; gap: 16px !important; }
+  html body .auth-page [class*="max-w-md"] {
+    padding: 18px 16px !important;
+    border-radius: 18px !important;
+  }
+  html body .auth-page form { gap: 13px !important; }
+  html body .auth-page button[type="submit"] { height: 46px !important; font-size: 14.5px !important; }
+
+  /* --- Тугмаҳо: майдони клики бароҳат --- */
+  html body :is(.auth-page, .admin-page) button:not(.admin-users-trigger) { min-height: 40px !important; }
+}
+
+/* --- Саҳифаҳои умумӣ дар телефон --- */
+@media (max-width: 680px) {
+  /* Фазои бехатари iPhone (ҷои поёнии экран) */
+  html body :is(.main-wrapper, .profile-content, .doruvori-page > main, .admin-page main) {
+    padding-bottom: calc(30px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Тӯри эълонҳо: як сутун, фосилаи ҷамъу ҷур */
+  html body .box { gap: 12px !important; }
+  html body .card { min-height: 0 !important; }
+
+  /* Навбарҳои дохилӣ: бе ларзиши уфуқӣ */
+  html body :is(.bozor-nav, .main-navbar, .doruvori-nav) {
+    padding: 9px 11px !important;
+    border-radius: 16px !important;
+  }
+  html body .nav-container { flex-wrap: wrap !important; }
+
+  /* Сарлавҳаҳо: андозаи мутаносиб */
+  html body .welcome-header { padding: 18px 16px !important; border-radius: 16px !important; }
+  html body .welcome-header h1 { font-size: clamp(21px, 6.2vw, 27px) !important; line-height: 1.18 !important; }
+
+  /* Модалҳо: аз лаби экран напаранд */
+  html body [role="dialog"] {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: calc(100dvh - 40px) !important;
+    overflow-y: auto !important;
+    border-radius: 18px !important;
+  }
+}
