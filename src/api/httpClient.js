@@ -1,5 +1,36 @@
 import { BASE_URL } from "./config";
 
+// Сервер дар Render-и ройгон пас аз чанд дақиқа бекорӣ хоб меравад ва
+// дархости аввал метавонад 30-60 сония кашад ё тамоман афтад ("Failed to fetch").
+// Барои ҳамин ҳар дархостро бо timeout мепечонем ва ҳангоми хатои шабака такрор мекунем.
+const TIMEOUT_MS = 25000;
+const RETRIES = 2;
+const RETRY_DELAY_MS = 1500;
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export async function apiFetch(url, options = {}) {
+  let lastError = null;
+
+  for (let attempt = 0; attempt <= RETRIES; attempt += 1) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } catch (err) {
+      lastError = err;
+      // Хатои шабака ё timeout — метавонад бедоршавии сервер бошад, такрор мекунем.
+      if (attempt < RETRIES) await wait(RETRY_DELAY_MS * (attempt + 1));
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  const error = new Error("errorNetwork");
+  error.cause = lastError;
+  throw error;
+}
+
 export function buildQuery(params) {
   const query = new URLSearchParams();
   for (const [key, value] of Object.entries(params || {})) {
@@ -18,7 +49,7 @@ export async function parseOrThrow(res, errorMessage) {
 }
 
 function sendJson(url, method, data, errorMessage) {
-  return fetch(url, {
+  return apiFetch(url, {
     method,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -30,13 +61,13 @@ export function createResourceClient(resource) {
 
   return {
     async getAll(params) {
-      const res = await fetch(`${url}${buildQuery(params)}`);
+      const res = await apiFetch(`${url}${buildQuery(params)}`);
       const list = await parseOrThrow(res, `Хатогӣ ҳангоми гирифтани ${resource}`);
       return Array.isArray(list) ? list : [];
     },
 
     async getById(id) {
-      const res = await fetch(`${url}/${id}`);
+      const res = await apiFetch(`${url}/${id}`);
       return parseOrThrow(res, `Сабт бо ин ID дар ${resource} ёфт нашуд`);
     },
 
@@ -53,7 +84,7 @@ export function createResourceClient(resource) {
     },
 
     async remove(id) {
-      const res = await fetch(`${url}/${id}`, { method: "DELETE" });
+      const res = await apiFetch(`${url}/${id}`, { method: "DELETE" });
       return parseOrThrow(res, `Хатогӣ ҳангоми несткунии сабт дар ${resource}`);
     },
   };

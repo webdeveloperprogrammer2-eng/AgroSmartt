@@ -1,10 +1,10 @@
 import { BASE_URL } from "./config";
-import { buildQuery, parseOrThrow } from "./httpClient";
+import { apiFetch, buildQuery, parseOrThrow } from "./httpClient";
 
 const url = `${BASE_URL}/settings`;
 
 function send(path, method, data, errorMessage) {
-  return fetch(`${url}${path}`, {
+  return apiFetch(`${url}${path}`, {
     method,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -13,7 +13,7 @@ function send(path, method, data, errorMessage) {
 
 export const settingsApi = {
   async get(userId) {
-    const res = await fetch(`${url}${buildQuery({ userId })}`);
+    const res = await apiFetch(`${url}${buildQuery({ userId })}`);
     return parseOrThrow(res, "Танзимот гирифта нашуд");
   },
 
