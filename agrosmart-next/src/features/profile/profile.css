@@ -1,0 +1,1191 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --pg-primary: #10b981;
+    --pg-primary-hover: #059669;
+    --pg-primary-grad: linear-gradient(135deg, #10b981, #059669);
+    --blue-grad: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    --dark: #0f172a;
+    --gray: #64748b;
+    --light-bg: #f8fafc;
+    --pg-border: #e2e8f0;
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--dark);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    /* Пешгирии скролли уфуқӣ */
+}
+
+/* NAVBAR STRUCTURE (ВУРУДИ НАВ КИ SIDEBAR-РО ИВАЗ НАМУД) */
+.main-navbar {
+    width: 100%;
+    height: 70px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--pg-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-logo {
+    font-size: 22px;
+    font-weight: 800;
+    background: var(--pg-primary-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-toggle-btn {
+    background: var(--pg-primary-grad);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+/* RIGHT DRAWER (ПАРДАИ РОСТ) */
+.right-drawer {
+    position: fixed;
+    top: 0;
+    right: -340px;
+    width: 320px;
+    height: 100vh; /* 👑 ИСЛОҲ ШУД: Аз 0vh ба 100vh баргардонда шуд, то пурра кушода шавад */
+    background: #ffffff;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.right-drawer.active {
+    right: 0;
+}
+
+.close-drawer-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #f1f5f9;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.drawer-user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    background: var(--pg-primary-grad);
+    color: white;
+    font-size: 28px;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+.drawer-user-info h2 {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.user-phone {
+    color: var(--gray);
+    font-size: 13px;
+    margin: 4px 0 12px 0;
+    background: #f1f5f9;
+    padding: 4px 12px;
+    border-radius: 30px;
+}
+
+.badge-status {
+    background: #e6f7f0;
+    color: #059669;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: var(--pg-border);
+    margin: 20px 0;
+}
+
+.drawer-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.menu-item {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    transition: all 0.2s;
+}
+
+.menu-item:hover {
+    background: #f8fafc;
+    color: var(--pg-primary);
+    transform: translateX(-4px);
+}
+
+.btn-logout {
+    background: #fff5f5;
+    color: #ef4444;
+    border: 1px solid #ffe2e2;
+    padding: 12px;
+    width: 100%;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 95;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* MAIN CONTENT AREA SCREEN SCROLL BASED ONLY */
+.profile-content {
+    padding: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.welcome-header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.welcome-header p {
+    color: var(--gray);
+    font-size: 15px;
+}
+
+.action-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 30px 0;
+}
+
+/* ==========================================================================
+   EFFECTS FOR ACTION CARDS & BUTTONS (HOVER EFFECTS)
+   ========================================================================== */
+
+/* 1. Эффект барои худи Кортҳо (Action Cards) */
+.action-card {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-8px); /* Корт бо нармӣ ба боло мехезад */
+    border-color: rgba(16, 185, 129, 0.3); /* Сарҳад каме ранг мегирад */
+    box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.15); /* Сояи калон ва мулоим */
+}
+
+/* Эффекти махсус барои корти замин (ранги кабуд) ҳангоми ховер */
+.action-card.card-blue:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Эффекти дурахши дарунӣ (Glow) ҳангоми ховер кардани корт */
+.action-card:hover .card-bg-glow {
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+}
+.action-card.card-blue:hover .card-bg-glow {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+}
+
+/* Эффект барои Эмодзиҳо (🍏, 🚜) даруни корт */
+.action-card .card-icon {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.action-card:hover .card-icon {
+    transform: scale(1.2) rotate(10deg); /* Эмодзи калон ва каме тоб мехӯрад */
+}
+
+
+/* 2. Эффект барои Тугмаҳои даруни корт (Action Buttons) */
+.btn-action {
+    position: relative;
+    overflow: hidden;
+    background-size: 200% auto;
+    transition: transform 0.3s ease, 
+                box-shadow 0.3s ease, 
+                background-position 0.4s ease,
+                filter 0.3s ease;
+}
+
+/* Ховер барои тугмаи корти сабз */
+.card-green .btn-action:hover {
+    background-position: right center; /* Ҳаракати сулиси градиент */
+    transform: translateY(-2px); /* Тугма ба боло ҳаракат мекунад */
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.35); /* Дурахши сояи сабз */
+    filter: brightness(1.05); /* Каме равшантар шудан */
+}
+
+/* Тугмаи корти замин акнун ҳамранги тугмаи корти маҳсулот аст */
+.card-blue .btn-action:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.35);
+    filter: brightness(1.05);
+}
+
+/* Ҳангоми пахш кардани тугмаҳо (Click / Active State) */
+.btn-action:active {
+    transform: translateY(1px); /* Эффекти пахшшавии воқеӣ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-card {
+    background: #ffffff;
+    padding: 16px 20px; /* 👑 ИСЛОҲ ШУД: Паддинг майда карда шуд, то кортҳо дароз ва безеб набошанд */
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--pg-border);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    height: auto; /* 👑 ИСЛОҲ ШУД: Баландии кортҳо автоматӣ фишурда ва зич шуд */
+}
+
+.card-bg-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.01) 0%, transparent 60%);
+}
+
+.card-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.action-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.action-card p {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.btn-action {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.card-green .btn-action {
+    background: var(--pg-primary-grad);
+}
+
+.card-blue .btn-action {
+    background: var(--pg-primary-grad);
+}
+
+.section-container h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.cards-grid {
+    display: grid;
+    /* Кортҳо калонтар шуданд: ҳадди ақал 360px ва тамоми бари саҳифаро пур мекунанд */
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 28px;
+}
+
+/* CARDS STRUCTURE */
+.display-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--pg-border);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+.display-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.display-card img {
+    width: 100%;
+    height: 200px; /* Сурати калонтар — корт зеботар ва хонотар шуд */
+    object-fit: cover;
+}
+
+.display-card-body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-tag {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+.tag-green {
+    background: #e6f7f0;
+    color: #10b981;
+}
+
+.tag-blue {
+    background: #ebf3fe;
+    color: #3b82f6;
+}
+
+.display-card h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--dark);
+}
+
+.card-location {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-footer-info {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.card-price {
+    font-size: 19px;
+    font-weight: 800;
+    color: #059669;
+}
+
+.price-blue {
+    color: #1d4ed8;
+}
+
+.card-count {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+/* Тугмаҳои дохили корт (Таҳрир / Нест) */
+.card-buttons button {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-border-green {
+    border-top: 4px solid #10b981;
+}
+
+.card-border-blue {
+    border-top: 4px solid #3b82f6;
+}
+
+.empty-text {
+    grid-column: 1 / -1;
+    color: var(--gray);
+    background: #ffffff;
+    padding: 30px;
+    text-align: center;
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--pg-border);
+}
+
+/* CUSTOM MODALS WITH 0.5s ANIMATION */
+.CustomModal {
+    border: none;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 480px;
+    max-height: 85vh;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: var(--shadow-lg);
+    display: none;
+    flex-direction: column;
+    outline: none;
+
+    /* Аниматсияи пайдошавӣ дар 0.5 сония ⏱️ */
+    opacity: 0;
+    transform: scale(0.85) translateY(30px);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Модали пӯшида набояд ҷои саҳифаро ишғол кунад (боиси скролли зиёдатӣ мешуд) */
+.CustomModal[open] {
+    display: flex;
+}
+
+/* transform: none — на scale(1)! Агар модал transform дошта бошад, рӯйхати
+   селект (position: fixed) нисбат ба модал ҳисоб мешавад ва каҷ меафтад. */
+.CustomModal.modal-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.CustomModal::backdrop {
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(6px);
+}
+
+.modal-header {
+    padding: 18px 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-green {
+    background: linear-gradient(135deg, #10b981, #047857);
+}
+
+.header-blue {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.close-x {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Назорати скролли дарунии формаҳо */
+.modal-form {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.modal-form::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal-form::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 12px;
+    color: #475569;
+    font-weight: 700;
+}
+
+.modal-form input,
+.modal-form select,
+.modal-form textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    background: #f8fafc;
+    outline: none;
+    font-size: 14px;
+}
+
+.modal-form input:focus,
+.modal-form select:focus,
+.modal-form textarea:focus {
+    background: #ffffff;
+    border-color: #3b82f6;
+}
+
+.modal-form textarea {
+    height: 70px;
+    resize: none;
+}
+
+/* Селекти shadcn (button[role="combobox"]) бояд бо дигар инпутҳои форма якхела намояд */
+.modal-form button[role="combobox"] {
+    width: 100%;
+    height: auto;
+    padding: 11px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    background: #f8fafc;
+    font-size: 14px;
+    color: var(--dark);
+}
+
+.modal-form button[role="combobox"]:focus {
+    background: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: none;
+}
+
+html[data-theme="dark"] .modal-form button[role="combobox"] {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    border-top: 1px solid #f1f5f9;
+    flex-shrink: 0;
+    background: #ffffff;
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    padding: 11px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-submit {
+    border: none;
+    padding: 11px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.submit-green {
+    background: var(--pg-primary-grad);
+}
+
+.submit-blue {
+    background: var(--blue-grad);
+}
+
+/* RESPONSIVE ADAPTIVE */
+@media (max-width: 768px) {
+    .main-navbar {
+        padding: 0 20px;
+    }
+
+    .profile-content {
+        padding: 20px;
+    }
+
+    .welcome-header h1 {
+        font-size: 24px;
+    }
+
+    .action-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ==========================================================================
+   Тугмаи "+" дар кунҷ + менюи хурди иловакунӣ (ба ҷои се корти калон)
+   ========================================================================== */
+.add-fab-wrap {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 55;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.add-fab {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pro-primary-2), var(--pro-primary));
+    color: #04140a;
+    cursor: pointer;
+    box-shadow: 0 14px 30px rgba(14, 159, 74, .34);
+    transition: transform .22s cubic-bezier(.22, 1, .36, 1), box-shadow .22s ease;
+}
+
+.add-fab:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(14, 159, 74, .42); }
+
+/* Кушода бошад, "+" ба "×" мегардад */
+.add-fab.is-open { transform: rotate(45deg); }
+
+.add-fab-menu {
+    width: min(310px, calc(100vw - 34px));
+    padding: 10px;
+    border: 1px solid var(--pro-border);
+    border-radius: 18px;
+    background: var(--pro-surface);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .28);
+    animation: addFabPop .2s cubic-bezier(.22, 1, .36, 1);
+}
+
+@keyframes addFabPop {
+    from { opacity: 0; transform: translateY(10px) scale(.96); }
+}
+
+.add-fab-menu-title {
+    margin: 2px 0 8px 10px;
+    color: var(--pro-muted);
+    font: 800 11px/1 "Manrope", sans-serif;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+}
+
+.add-fab-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 13px;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background .18s ease;
+}
+
+.add-fab-item:hover { background: var(--pro-surface-2); }
+
+.add-fab-item-icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 11px;
+}
+
+.add-fab-item-icon.is-green { background: rgba(29, 189, 98, .14); color: #1dbd62; }
+.add-fab-item-icon.is-blue { background: rgba(56, 132, 255, .14); color: #3884ff; }
+.add-fab-item-icon.is-violet { background: rgba(147, 106, 255, .14); color: #936aff; }
+
+.add-fab-item-text { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+
+.add-fab-item-text b {
+    color: var(--pro-text);
+    font: 700 13px/1.3 "Manrope", sans-serif;
+}
+
+.add-fab-item-text small {
+    color: var(--pro-text-2);
+    font: 500 11px/1.4 "DM Sans", sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Дар телефон тугма набояд сатри охирини рӯйхатро пӯшонад */
+@media (max-width: 768px) {
+    .add-fab-wrap { right: 14px; bottom: 14px; }
+    .add-fab { width: 52px; height: 52px; }
+    .profile-content { padding-bottom: 96px !important; }
+}
+
+/* ==========================================================================
+   Хулосаи кабинет дар "Хуш омадед" — савдо, фармоиш, харид, ҷой
+   ========================================================================== */
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.profile-stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 13px;
+    border: 1px solid var(--pro-border);
+    border-radius: 14px;
+    background: var(--pro-surface-2);
+}
+
+.profile-stat-icon {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+}
+
+.profile-stat-icon.is-green { background: rgba(29, 189, 98, .14); color: #1dbd62; }
+.profile-stat-icon.is-blue { background: rgba(56, 132, 255, .14); color: #3884ff; }
+.profile-stat-icon.is-violet { background: rgba(147, 106, 255, .14); color: #936aff; }
+.profile-stat-icon.is-amber { background: rgba(240, 170, 40, .16); color: #f0aa28; }
+
+.profile-stat-text { min-width: 0; display: flex; flex-direction: column; }
+
+.profile-stat-text b {
+    color: var(--pro-text);
+    font: 800 15px/1.2 "Manrope", sans-serif;
+    white-space: nowrap;
+}
+
+.profile-stat-text small {
+    color: var(--pro-text-2);
+    font: 600 11px/1.4 "DM Sans", sans-serif;
+}
+
+@media (max-width: 640px) {
+    .profile-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .profile-stat { padding: 9px 10px; gap: 8px; }
+    .profile-stat-text b { font-size: 14px; }
+}
+
+/* ==========================================================================
+   Бахшҳо ва кортҳои кабинет (маҳсулот / замин / дору)
+   Синфҳои нави `psection-*` ва `pcard-*` — то саҳифаи мушт��рӣ,
+   ки ҳанӯз `.display-card`-и кӯҳнаро истифода мебарад, даст нахӯрад.
+   ========================================================================== */
+.psection { margin-top: 30px; }
+
+.psection-head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+}
+
+.psection-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+}
+
+.psection-icon.tone-green { background: rgba(29, 189, 98, .14); color: #1dbd62; }
+.psection-icon.tone-blue { background: rgba(56, 132, 255, .14); color: #3884ff; }
+.psection-icon.tone-violet { background: rgba(147, 106, 255, .14); color: #936aff; }
+
+.psection-head h2 {
+    margin: 0;
+    color: var(--pro-text);
+    font: 800 17px/1.2 "Manrope", sans-serif;
+    letter-spacing: -.3px;
+}
+
+.psection-count {
+    min-width: 24px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--pro-surface-2);
+    color: var(--pro-text-2);
+    font: 700 12px/1.5 "DM Sans", sans-serif;
+    text-align: center;
+}
+
+.psection-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 30px 18px;
+    border: 1px dashed var(--pro-border);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--pro-surface) 55%, transparent);
+    color: var(--pro-muted);
+}
+
+.psection-empty p {
+    margin: 0;
+    font: 600 13px/1.5 "DM Sans", sans-serif;
+}
+
+/* --- Гриди кортҳо: ихчамтар аз пештара --- */
+.pcards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+}
+
+.pcard {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--pro-border);
+    border-radius: 16px;
+    background: var(--pro-surface);
+    box-shadow: var(--pro-shadow);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.pcard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--pro-shadow-hover);
+}
+
+.pcard.tone-green:hover { border-color: color-mix(in srgb, #1dbd62 45%, transparent); }
+.pcard.tone-blue:hover { border-color: color-mix(in srgb, #3884ff 45%, transparent); }
+.pcard.tone-violet:hover { border-color: color-mix(in srgb, #936aff 45%, transparent); }
+
+.pcard-media {
+    position: relative;
+    height: 126px;
+    display: grid;
+    place-items: center;
+    background: var(--pro-surface-2);
+    color: var(--pro-muted);
+}
+
+.pcard-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Тег болои тасвир меистад — сатри алоҳида намегирад */
+.pcard-tag {
+    position: absolute;
+    left: 9px;
+    top: 9px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(6, 18, 11, .72);
+    color: #fff;
+    font: 700 10px/1.6 "DM Sans", sans-serif;
+    backdrop-filter: blur(6px);
+}
+
+.pcard-body {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 12px 13px 13px;
+}
+
+.pcard-body h4 {
+    margin: 0;
+    color: var(--pro-text);
+    font: 800 14px/1.3 "Manrope", sans-serif;
+    letter-spacing: -.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pcard-loc {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    color: var(--pro-text-2);
+    font: 600 11px/1.4 "DM Sans", sans-serif;
+}
+
+.pcard-desc {
+    margin: 0;
+    color: var(--pro-muted);
+    font: 500 11.5px/1.5 "DM Sans", sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 34px;
+}
+
+.pcard-foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 3px;
+    padding-top: 9px;
+    border-top: 1px solid var(--pro-border);
+}
+
+.pcard-price {
+    color: var(--pro-primary);
+    font: 800 15px/1.2 "Manrope", sans-serif;
+}
+
+.pcard.tone-blue .pcard-price { color: #3884ff; }
+.pcard.tone-violet .pcard-price { color: #936aff; }
+
+.pcard-meta {
+    color: var(--pro-text-2);
+    font: 600 11px/1.4 "DM Sans", sans-serif;
+    white-space: nowrap;
+}
+
+.pcard-actions {
+    display: flex;
+    gap: 7px;
+    margin-top: 9px;
+}
+
+.pcard-btn {
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid var(--pro-border);
+    border-radius: 10px;
+    background: var(--pro-surface-2);
+    color: var(--pro-text);
+    font: 700 12px "DM Sans", sans-serif;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+
+.pcard-btn.is-edit { flex: 1; }
+
+.pcard-btn.is-edit:hover {
+    border-color: color-mix(in srgb, var(--pro-primary) 45%, transparent);
+    background: var(--pro-primary-soft);
+    color: var(--pro-primary);
+}
+
+/* Несткунӣ — танҳо икона, то сатр танг нашавад ва тасодуфан пахш нашавад */
+.pcard-btn.is-delete {
+    width: 34px;
+    flex-shrink: 0;
+    color: var(--pro-muted);
+}
+
+.pcard-btn.is-delete:hover {
+    border-color: color-mix(in srgb, var(--pro-danger) 50%, transparent);
+    background: color-mix(in srgb, var(--pro-danger) 12%, transparent);
+    color: var(--pro-danger);
+}
+
+@media (max-width: 640px) {
+    .pcards-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .pcard-media { height: 104px; }
+    .pcard-body { padding: 10px 11px 11px; }
+    .psection-head h2 { font-size: 15px; }
+}
+
+.drawer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* Навъи ҳисоб — ранги дигар, то бо тамғаи "фаъол" омехта нашавад */
+.badge-type {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.notif-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.notif-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 9px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 30px;
+    background: transparent;
+    color: #059669;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.notif-link-btn:hover {
+    background: #e6f7f0;
+    border-color: #34d399;
+}
+
+.notif-chat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border: 1px solid var(--pro-border);
+    border-radius: 14px;
+    background: var(--pro-primary-soft);
+    color: inherit;
+    text-decoration: none;
+}
+
+.notif-chat-row:hover {
+    border-color: var(--pro-primary);
+}
+
+.notif-chat-icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: 12px;
+    background: var(--pro-surface);
+    color: var(--pro-primary);
+}
+
+.notif-chat-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.notif-chat-text small {
+    font-size: 12px;
+    color: var(--pro-text-2);
+}
+
+.notif-chat-count {
+    flex: none;
+    min-width: 24px;
+    padding: 3px 9px;
+    border-radius: 30px;
+    background: var(--pro-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+}

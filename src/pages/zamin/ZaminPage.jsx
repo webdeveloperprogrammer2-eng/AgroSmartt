@@ -1,0 +1,129 @@
+import { useEffect, useMemo, useState } from "react";
+import ZaminNavbar from "./ZaminNavbar";
+import ZaminGrid from "./ZaminGrid";
+import ZaminCartModal from "./ZaminCartModal";
+import ZaminDetailModal from "./ZaminDetailModal";
+import ZaminCheckoutModal from "./ZaminCheckoutModal";
+import { fetchLands } from "./api";
+import { useCart } from "../../hooks/useCart";
+import { useUser } from "../../context/user";
+import { useTranslation } from "../../context/language";
+import { useDialog } from "../../context/dialog";
+import { useNavigate } from "react-router-dom";
+import { sendOrderNotifications } from "../../lib/notify";
+import { ALL, normalizeCity } from "../../lib/catalog";
+import "./zamin.css";
+
+export default function ZaminPage() {
+  const [allLands, setAllLands] = useState([]);
+  const [search, setSearch] = useState("");
+  const [city, setCity] = useState(ALL);
+
+  const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [detailLand, setDetailLand] = useState(null);
+
+  const { cart, addItemOnce, removeItem, clearCart, totalPrice } = useCart("zaminCart");
+  const { user, isAdmin } = useUser();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const dialog = useDialog();
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchLands()
+      .then((data) => {
+        if (!cancelled) setAllLands(Array.isArray(data) ? data : []);
+      })
+      .catch((err) => {
+        console.error(err);
+        if (!cancelled) setAllLands([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const visibleLands = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return allLands.filter((z) => {
+      if (city !== ALL && normalizeCity(z.city) !== city) return false;
+      if (query && !String(z.name || "").toLowerCase().includes(query)) return false;
+      return true;
+    });
+  }, [allLands, city, search]);
+
+  function requireAuth() {
+    if (isAdmin) {
+      navigate("/");
+      return false;
+    }
+    if (!user) {
+      dialog.info(t("orderNeedsAuth")).then(() => navigate("/auth"));
+      return false;
+    }
+    return true;
+  }
+
+  function handleSelect(land) {
+    if (!requireAuth()) return;
+    const added = addItemOnce(land);
+    if (added) dialog.success(t("landAdded"));
+    else dialog.info(t("landAlreadyInCart"));
+  }
+
+  function handleOpenCheckout() {
+    if (!requireAuth()) return;
+    setCartOpen(false);
+    setCheckoutOpen(true);
+  }
+
+  async function handleCheckoutSubmit() {
+    try {
+      await sendOrderNotifications({ type: "land", user, items: cart });
+      clearCart();
+      setCheckoutOpen(false);
+      await dialog.success(t("orderSentToOwner"));
+    } catch (error) {
+      console.error("Хатогӣ ҳангоми фиристодан:", error);
+      await dialog.error(t("error"));
+    }
+  }
+
+  return (
+    <>
+      <ZaminNavbar
+        search={search}
+        onSearchChange={setSearch}
+        city={city}
+        onCityChange={setCity}
+        cartCount={cart.length}
+        onCartClick={() => setCartOpen(true)}
+      />
+
+      <main className="main-wrapper">
+        <section className="products-area">
+          <ZaminGrid lands={visibleLands} onSelect={handleSelect} onDetail={setDetailLand} />
+        </section>
+      </main>
+
+      <ZaminCartModal
+        open={cartOpen}
+        onClose={() => setCartOpen(false)}
+        cart={cart}
+        totalPrice={totalPrice}
+        onRemove={removeItem}
+        onCheckout={handleOpenCheckout}
+      />
+
+      <ZaminCheckoutModal
+        open={checkoutOpen}
+        onClose={() => setCheckoutOpen(false)}
+        user={user}
+        onSubmit={handleCheckoutSubmit}
+      />
+
+      <ZaminDetailModal open={Boolean(detailLand)} onClose={() => setDetailLand(null)} land={detailLand} />
+    </>
+  );
+}

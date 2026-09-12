@@ -1,0 +1,440 @@
+/* Саҳифаҳои ронандагон ва отзивҳо */
+.nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pro-text-2);
+    text-decoration: none;
+}
+
+.nav-back:hover {
+    color: var(--pro-primary);
+}
+
+.drivers-page,
+.driver-page,
+.chats-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+}
+
+.drivers-head h1 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 4px;
+    font-size: 24px;
+}
+
+.drivers-head p {
+    margin: 0 0 20px;
+    color: var(--pro-text-2);
+    font-size: 14px;
+}
+
+.drivers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.driver-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid var(--pro-border);
+    border-radius: 16px;
+    background: var(--pro-surface);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+
+.driver-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--pro-primary-2);
+    box-shadow: 0 8px 22px rgba(5, 150, 105, .12);
+}
+
+.driver-avatar {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pro-primary), var(--pro-primary-2));
+    color: #fff;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.driver-avatar.is-big {
+    width: 76px;
+    height: 76px;
+    font-size: 30px;
+    margin: 0 auto 10px;
+}
+
+.driver-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+}
+
+.driver-name {
+    font-size: 15px;
+}
+
+.driver-city,
+.driver-rate {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--pro-text-2);
+}
+
+.driver-rate b {
+    color: var(--pro-amber, #d97706);
+}
+
+.driver-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex: none;
+}
+
+.driver-badge,
+.driver-chat-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.driver-badge {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.driver-chat-hint {
+    background: var(--pro-primary-soft);
+    color: var(--pro-primary);
+}
+
+/* Саҳифаи як ронанда */
+.driver-hero {
+    padding: 22px;
+    margin-bottom: 20px;
+    border: 1px solid var(--pro-border);
+    border-radius: 18px;
+    background: var(--pro-surface);
+    text-align: center;
+}
+
+.driver-hero h1 {
+    margin: 0 0 6px;
+    font-size: 21px;
+}
+
+.driver-hero-rate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.driver-hero-rate b {
+    color: var(--pro-amber, #d97706);
+}
+
+.driver-hero-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--pro-text-2);
+}
+
+.driver-hero-meta a,
+.driver-hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.driver-chat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 16px;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, var(--pro-primary), var(--pro-primary-2));
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.driver-chat-btn:hover {
+    filter: brightness(1.06);
+}
+
+/* Отзивҳо */
+.reviews-block h2 {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 17px;
+    margin: 0 0 12px;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.review-form-stars {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.review-form textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--pro-border);
+    border-radius: 12px;
+    background: var(--pro-surface);
+    color: inherit;
+    font: inherit;
+    resize: vertical;
+}
+
+.review-send {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 30px;
+    background: var(--pro-primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.review-error {
+    margin: 0;
+    color: var(--pro-danger);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.review-hint {
+    color: var(--pro-text-2);
+    font-size: 13px;
+}
+
+.review-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-item {
+    padding: 12px 14px;
+    border: 1px solid var(--pro-border);
+    border-radius: 14px;
+    background: var(--pro-surface);
+}
+
+.review-item-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.review-item p {
+    margin: 6px 0 4px;
+    font-size: 14px;
+}
+
+.review-item time {
+    font-size: 11px;
+    color: var(--pro-text-2);
+}
+
+.drivers-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 50px 20px;
+    color: var(--pro-text-2);
+}
+
+/* Ситораҳои баҳо */
+.star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.star-rating.is-input button {
+    background: none;
+    border: none;
+    padding: 0 1px;
+    cursor: pointer;
+}
+
+.star-on {
+    color: #f59e0b;
+    fill: #f59e0b;
+}
+
+.star-off {
+    color: #d1d5db;
+}
+
+/* Реҷаи торик */
+html[data-theme="dark"] .driver-badge { background: rgba(99, 102, 241, .18); color: #a5b4fc; }
+html[data-theme="dark"] .star-off { color: var(--pro-border); }
+html[data-theme="dark"] .driver-card:hover { box-shadow: 0 8px 22px rgba(0, 0, 0, .4); }
+
+/* Графикҳои пешрафт */
+.dstats { margin: 22px 0 26px; }
+
+.dstats-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 12px;
+    font-size: 17px;
+}
+
+.dstats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.dstats-card {
+    padding: 16px 18px;
+    border: 1px solid var(--pro-border);
+    border-radius: 18px;
+    background: var(--pro-surface);
+}
+
+.dstats-card-label {
+    display: block;
+    margin-bottom: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--pro-muted);
+}
+
+/* Тақсимоти баҳоҳо */
+.dbars { display: flex; flex-direction: column; gap: 8px; }
+
+.dbar-row {
+    display: grid;
+    grid-template-columns: 26px 1fr 22px;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+}
+
+.dbar-star { color: var(--pro-text-2); font-weight: 700; }
+
+.dbar-track {
+    height: 10px;
+    border-radius: 5px;
+    background: var(--pro-surface-2);
+    border: 1px solid var(--pro-border);
+    overflow: hidden;
+}
+
+/* Як ченак — як ранг. Нӯги рост мудаввар, чап ба сифр часпидааст. */
+.dbar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    background: #f0a71b;
+    transition: width .5s cubic-bezier(.22, 1, .36, 1);
+}
+
+.dbar-count { text-align: right; font-weight: 700; color: var(--pro-text-2); }
+
+/* Ченакҳои фоизӣ */
+.dmeter { margin-bottom: 14px; }
+
+.dmeter-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--pro-text-2);
+}
+
+.dmeter-head b { font-size: 15px; color: var(--pro-text); }
+
+.dmeter-track {
+    display: block;
+    height: 10px;
+    border-radius: 5px;
+    background: var(--pro-surface-2);
+    border: 1px solid var(--pro-border);
+    overflow: hidden;
+}
+
+.dmeter-fill {
+    display: block;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    transition: width .5s cubic-bezier(.22, 1, .36, 1);
+}
+
+.dmeter-fill.is-green { background: var(--pro-primary); }
+.dmeter-fill.is-amber { background: #f0a71b; }
+
+.dstats-note {
+    margin: 0;
+    font-size: 12px;
+    color: var(--pro-text-2);
+}
+
+html[data-theme="dark"] .dbar-fill,
+html[data-theme="dark"] .dmeter-fill.is-amber { background: #f5b940; }

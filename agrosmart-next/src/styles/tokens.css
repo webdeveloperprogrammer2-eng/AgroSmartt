@@ -1,0 +1,70 @@
+/*
+  AgroSmart — умумӣ системаи токенҳои дизайн.
+  Палитраи заминию кишоварзӣ: сабзи зайтунӣ амиқ + хокаранги сурх (terracotta) + бежи гарм.
+  Ин файл дар ҳамаи style.css-ҳо тавассути @import истифода мешавад,
+  то тамоми сайт як ҳувияти визуалии ягона дошта бошад.
+*/
+
+:root {
+  /* ---- Палитра: сафед + сабзи қавӣ ---- */
+  --as-cream: #FFFFFF;
+  --as-cream-soft: #EAF7EE;
+  --as-paper: #FFFFFF;
+  --as-ink: #112016;
+  --as-ink-soft: #44594B;
+  --as-ink-muted: #7C9183;
+
+  --as-olive: #0E9F4A;
+  --as-olive-dark: #07772F;
+  --as-olive-light: #34C76C;
+
+  --as-clay: #0E9F4A;
+  --as-clay-dark: #07772F;
+  --as-clay-light: #34C76C;
+
+  --as-sand-border: #D7F0DE;
+  --as-sand-border-strong: #B9E6C7;
+
+  --as-danger: #B3402F;
+  --as-danger-bg: #FBEAE5;
+  --as-blue: #0E9F4A;
+
+  /* ---- Типографика ---- */
+  --as-font-display: 'Fraunces', 'Georgia', serif;
+  --as-font-body: 'Manrope', 'Segoe UI', sans-serif;
+
+  /* ---- Форма / тени ---- */
+  --as-radius-sm: 8px;
+  --as-radius: 14px;
+  --as-radius-lg: 22px;
+  --as-shadow-sm: 0 2px 10px rgba(14, 159, 74, 0.08);
+  --as-shadow-md: 0 10px 30px rgba(14, 159, 74, 0.14);
+  --as-shadow-lg: 0 25px 50px rgba(14, 159, 74, 0.22);
+
+  /* ---- Аниматсия ---- */
+  --as-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes asFadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes asFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes asPulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 159, 74, 0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(14, 159, 74, 0); }
+}
+
+@keyframes asFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.as-animate-in {
+  animation: asFadeInUp 0.6s var(--as-ease) both;
+}

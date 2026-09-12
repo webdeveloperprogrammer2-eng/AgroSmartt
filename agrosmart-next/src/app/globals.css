@@ -1,0 +1,37 @@
+/* Ин файлҳо дар ҳамаи саҳифаҳо истифода мешаванд */
+@import "../styles/tokens.css";
+@import "../styles/theme.css";
+@import "../styles/shadcn.css";
+@import "../styles/pro-pages.css";
+
+/* Тозакунии умумӣ (CSS reset) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--as-font-body);
+  background: #f7faf7;
+  color: var(--as-ink);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

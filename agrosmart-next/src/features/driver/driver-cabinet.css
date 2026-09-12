@@ -1,0 +1,270 @@
+/* Кабинети ронанда — ранги дигар (кабуди шаб), то бо кабинети деҳқон омехта нашавад */
+.dcab {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 16px 80px;
+}
+
+.dcab-hero {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 26px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 55%, #4338ca 100%);
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(30, 41, 59, .28);
+}
+
+.dcab-hero-icon {
+    display: grid;
+    place-items: center;
+    width: 66px;
+    height: 66px;
+    flex: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .22);
+}
+
+.dcab-hero-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.dcab-kicker {
+    display: inline-block;
+    padding: 3px 10px;
+    margin-bottom: 6px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, .16);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.dcab-hero-text h1 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    line-height: 1.15;
+}
+
+.dcab-hero-rate {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+}
+
+.dcab-hero-rate b {
+    color: #fbbf24;
+}
+
+.dcab-hero-rate small {
+    opacity: .75;
+}
+
+.dcab-hero-link {
+    flex: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    background: #fff;
+    color: #1e293b;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.dcab-hero-link:hover {
+    background: #e2e8f0;
+}
+
+/* Рақамҳои асосии ронанда */
+.dcab-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 18px 0 26px;
+}
+
+.dcab-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 16px;
+    border: 1px solid var(--pro-border);
+    border-radius: 18px;
+    background: var(--pro-surface);
+}
+
+.dcab-tile b {
+    font-size: 21px;
+    line-height: 1.1;
+}
+
+.dcab-tile small {
+    font-size: 11px;
+    color: var(--pro-text-2);
+}
+
+.dcab-tile-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 6px;
+    border-radius: 11px;
+}
+
+.dcab-tile-icon.is-amber { background: #fef3c7; color: var(--pro-amber, #d97706); }
+.dcab-tile-icon.is-violet { background: #ede9fe; color: #7c3aed; }
+.dcab-tile-icon.is-blue { background: #dbeafe; color: #2563eb; }
+.dcab-tile-icon.is-green { background: #d1fae5; color: var(--pro-primary); }
+
+.dcab-section {
+    margin-bottom: 30px;
+}
+
+.dcab-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 3px;
+    font-size: 18px;
+}
+
+.dcab-section-desc {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: var(--pro-text-2);
+}
+
+.dcab-empty {
+    padding: 34px 20px;
+    border: 1px dashed var(--pro-border);
+    border-radius: 18px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--pro-text-2);
+}
+
+/* Кортҳои бор */
+.djob-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+}
+
+.djob-card {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 16px;
+    border: 1px solid var(--pro-border);
+    border-left: 4px solid #4338ca;
+    border-radius: 16px;
+    background: var(--pro-surface);
+}
+
+.djob-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.djob-head h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.djob-volume {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex: none;
+    padding: 3px 9px;
+    border-radius: 30px;
+    background: #eef2ff;
+    color: #4338ca;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.djob-desc {
+    margin: 0;
+    font-size: 13px;
+    color: var(--pro-text-2);
+}
+
+.djob-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--pro-text-2);
+}
+
+.djob-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.djob-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--pro-border);
+}
+
+.djob-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4338ca;
+    text-decoration: none;
+}
+
+.djob-chat {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #4338ca, #6366f1);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.djob-chat:hover {
+    filter: brightness(1.08);
+}
+
+@media (max-width: 900px) {
+    .dcab-tiles { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .dcab-hero { flex-direction: column; text-align: center; }
+    .dcab-hero-rate { justify-content: center; }
+}
+
+/* Реҷаи торик: заминаҳои пастелӣ ба ранги шаффофи ҳамон ранг иваз мешаванд */
+html[data-theme="dark"] .dcab-tile-icon.is-amber { background: rgba(245, 158, 11, .16); color: #fbbf24; }
+html[data-theme="dark"] .dcab-tile-icon.is-violet { background: rgba(139, 92, 246, .18); color: #c4b5fd; }
+html[data-theme="dark"] .dcab-tile-icon.is-blue { background: rgba(59, 130, 246, .18); color: #93c5fd; }
+html[data-theme="dark"] .dcab-tile-icon.is-green { background: var(--pro-primary-soft); color: var(--pro-primary); }
+html[data-theme="dark"] .djob-volume { background: rgba(99, 102, 241, .18); color: #a5b4fc; }
+html[data-theme="dark"] .djob-card { border-left-color: #6366f1; }
+html[data-theme="dark"] .djob-phone { color: #a5b4fc; }
+html[data-theme="dark"] .dcab-hero-link { background: var(--pro-surface); color: var(--pro-text); }
+html[data-theme="dark"] .dcab-hero-link:hover { background: var(--pro-surface-2); }

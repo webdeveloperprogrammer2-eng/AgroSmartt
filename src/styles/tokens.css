@@ -1,0 +1,95 @@
+:root {
+  --as-cream: #FBF8F3;
+  --as-cream-soft: #E7EDE8;
+  --as-paper: #FBF8F3;
+
+  --as-ink: #2C2A27;
+  --as-ink-soft: #5A5751;
+  --as-ink-muted: #8A867E;
+
+  --as-olive: #3A6650;
+  --as-olive-dark: #2C5040;
+  --as-olive-light: #47755E;
+
+  --as-clay: #3A6650;
+  --as-clay-dark: #2C5040;
+  --as-clay-light: #47755E;
+
+  --as-sand-border: #DFD8CC;
+  --as-sand-border-strong: #C9C0B1;
+
+  --as-danger: #8C3A34;
+  --as-danger-bg: #F2E5E3;
+  --as-blue: #3D5A73;
+  --as-amber: #8A6A2F;
+
+  --as-font-display: "Source Serif 4", Georgia, serif;
+  --as-font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --as-radius-sm: 10px;
+  --as-radius: 14px;
+  --as-radius-lg: 18px;
+  --as-shadow-sm: 0 1px 1px rgba(44, 42, 39, .04);
+  --as-shadow-md: 0 1px 2px rgba(44, 42, 39, .05);
+  --as-shadow-lg: 0 2px 6px rgba(44, 42, 39, .09);
+
+  --as-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-theme="dark"] {
+  --as-cream: #232528;
+  --as-cream-soft: rgba(134, 172, 147, .14);
+  --as-paper: #232528;
+
+  --as-ink: #E6E3DE;
+  --as-ink-soft: #A6A29B;
+  --as-ink-muted: #7C7973;
+
+  --as-olive: #86AC93;
+  --as-olive-dark: #769C83;
+  --as-olive-light: #9CBFA8;
+  --as-clay: #86AC93;
+  --as-clay-dark: #769C83;
+  --as-clay-light: #9CBFA8;
+
+  --as-sand-border: #34373B;
+  --as-sand-border-strong: #454A4F;
+
+  --as-danger: #C97F78;
+  --as-danger-bg: rgba(201, 127, 120, .14);
+  --as-blue: #7E9AB4;
+  --as-amber: #C4A469;
+
+  --as-shadow-sm: 0 1px 1px rgba(44, 42, 39, .04);
+  --as-shadow-md: 0 1px 2px rgba(44, 42, 39, .05);
+  --as-shadow-lg: 0 2px 6px rgba(44, 42, 39, .09);
+}
+
+@keyframes asFadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes asFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes asPulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 139, 82, .30); }
+  50% { box-shadow: 0 0 0 10px rgba(14, 139, 82, 0); }
+}
+
+@keyframes asFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes asShimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+.as-animate-in {
+  animation: asFadeInUp 0.55s var(--as-ease) both;
+}
