@@ -2259,3 +2259,81 @@ html body .admin-ov-row b {
     border-radius: 18px !important;
   }
 }
+
+/* ============================================================
+   НАВБАР ВА ТАНЗИМОТ ДАР ТЕЛЕФОН — вобаста ба андозаи экран
+   Ҳама чиз бо clamp() шино мешавад, то дар ҳар телефон ғунҷад
+   ============================================================ */
+@media (max-width: 680px) {
+  /* Иконкаи танзимот (забон/режим) дар телефон ҳам намоён --- пештар пинҳон буд */
+  html body .settings-widget-container {
+    display: flex !important;
+    position: relative !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Ҳама тугмаҳои навбар як андозаи шиноро мегиранд */
+  html body :is(
+    .settings-widget-container > button,
+    .settings-floating-btn,
+    .cart-icon-btn,
+    .profile-toggle-btn,
+    .profile-btn,
+    .mobile-menu-btn
+  ) {
+    flex: 0 0 auto !important;
+    width: clamp(34px, 9.6vw, 42px) !important;
+    height: clamp(34px, 9.6vw, 42px) !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    border-radius: clamp(9px, 2.6vw, 12px) !important;
+  }
+  html body :is(.settings-floating-btn, .cart-icon-btn, .profile-btn) svg {
+    width: clamp(17px, 4.8vw, 21px) !important;
+    height: clamp(17px, 4.8vw, 21px) !important;
+  }
+  html body .nav-avatar {
+    width: 100% !important;
+    height: 100% !important;
+    font-size: clamp(12px, 3.4vw, 15px) !important;
+  }
+
+  /* Фосилаи байни тугмаҳо низ шино */
+  html body :is(.profile-actions, .nav-actions) {
+    flex: 0 0 auto !important;
+    gap: clamp(4px, 1.7vw, 10px) !important;
+    margin-left: auto !important;
+  }
+  html body :is(.main-navbar, .nav-shell, .bozor-nav, .doruvori-nav) {
+    gap: clamp(6px, 2.2vw, 14px) !important;
+    padding-inline: clamp(9px, 3vw, 16px) !important;
+  }
+
+  /* Логотип кӯтоҳ мешавад, то тугмаи корбар ҳамеша ғунҷад */
+  html body :is(.nav-logo, .brand-name) {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    font-size: clamp(13px, 4vw, 18px) !important;
+  }
+  html body .brand { flex: 0 1 auto !important; min-width: 0 !important; }
+
+  /* Панели танзимот: аз лаби экран намепарад */
+  html body .settings-panel-card {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    left: auto !important;
+    width: min(290px, calc(100vw - 28px)) !important;
+    max-height: calc(100dvh - 150px) !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Телефонҳои хеле борик (iPhone SE ва монанди он) */
+@media (max-width: 380px) {
+  html body .nav-logo::before { display: none !important; }
+  html body :is(.main-navbar, .nav-shell) { padding-inline: 8px !important; }
+}
