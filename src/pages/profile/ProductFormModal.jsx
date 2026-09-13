@@ -3,7 +3,7 @@ import Modal from "../../components/shared/Modal";
 import ImagePicker from "../../components/shared/ImagePicker";
 import { useTranslation } from "../../context/language";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { CITIES, PRODUCT_CATEGORIES, normalizeCity, normalizeProductCategory } from "../../lib/catalog";
+import { CITIES, PRODUCT_CATEGORIES, productCategoryLabel, normalizeCity, normalizeProductCategory } from "../../lib/catalog";
 import { PLACEHOLDER_IMG } from "../../lib/images";
 
 import { X } from "lucide-react";
@@ -86,7 +86,7 @@ export default function ProductFormModal({ open, onClose, title, submitLabel, he
           <label htmlFor="product-category">{t("categoryLabel")}</label>
           <Select value={form.category} onValueChange={(v) => update("category", v)}>
             <SelectTrigger id="product-category">
-              <SelectValue />
+              <SelectValue>{productCategoryLabel(t, form.category)}</SelectValue>
             </SelectTrigger>
             <SelectContent>
               {PRODUCT_CATEGORIES.map((c) => (

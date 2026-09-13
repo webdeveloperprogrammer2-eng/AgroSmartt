@@ -2036,6 +2036,22 @@ html body .admin-ov-col small {
   color: var(--pro-muted) !important;
 }
 
+/* Диаграммаи рӯзона — 28–31 сутун, барои ҳамин сутунҳо борик */
+html body .admin-ov-chart.is-daily { gap: 3px !important; }
+html body .admin-ov-chart.is-daily .admin-ov-col { min-width: 0 !important; }
+html body .admin-ov-chart.is-daily .admin-ov-bars { gap: 2px !important; }
+html body .admin-ov-chart.is-daily .admin-ov-bar {
+  width: auto !important;
+  flex: 1 1 0 !important;
+  max-width: 9px !important;
+  border-radius: 3px 3px 0 0 !important;
+}
+html body .admin-ov-chart.is-daily .admin-ov-col small { font-size: 10.5px !important; white-space: nowrap !important; }
+html body .admin-ov-chart.is-daily .admin-ov-col.is-today small {
+  color: var(--pro-primary) !important;
+  font-weight: 700 !important;
+}
+
 html body .admin-ov-legend {
   display: flex !important;
   gap: 16px !important;
@@ -2200,6 +2216,9 @@ html body .admin-ov-row b {
   html body .admin-ov-head h3 { font-size: 14px !important; }
   html body .admin-ov-chart { height: 150px !important; gap: 7px !important; }
   html body .admin-ov-col small { font-size: 9.5px !important; }
+  html body .admin-ov-chart.is-daily { gap: 1px !important; }
+  html body .admin-ov-chart.is-daily .admin-ov-bars { gap: 1px !important; }
+  html body .admin-ov-chart.is-daily .admin-ov-col small { font-size: 8.5px !important; }
   html body .admin-ov-row { gap: 8px !important; }
   html body .admin-ov-row-label { font-size: 12px !important; }
 

@@ -5,7 +5,7 @@ import { ShoppingCart, Home } from "lucide-react";
 import { useTranslation } from "../../context/language";
 import SettingsWidget from "../../components/shared/SettingsWidget";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { ALL, CITIES, PRODUCT_CATEGORIES } from "../../lib/catalog";
+import { ALL, CITIES, PRODUCT_CATEGORIES, productCategoryLabel } from "../../lib/catalog";
 
 // Навбари бозор бо ҷустуҷӯ, филтрҳо ва тугмаи сабад
 export default function BozorNavbar({
@@ -41,7 +41,7 @@ export default function BozorNavbar({
           <div className="select-wrapper">
             <Select value={category} onValueChange={onCategoryChange}>
               <SelectTrigger className="w-40" aria-label={t("categoryLabel")}>
-                <SelectValue />
+                <SelectValue>{category === ALL ? t("allProducts") : productCategoryLabel(t, category)}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value={ALL}>{t("allProducts")}</SelectItem>

@@ -19,23 +19,25 @@ const fmt = (value) => new Intl.NumberFormat("ru-RU").format(Math.round(value ||
 const valueOf = (list) =>
   list.reduce((sum, item) => sum + num(item.price) * Math.max(num(item.leftovers), 1), 0);
 
-function monthOf(item) {
+const dayKey = (date) =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+
+function dayOf(item) {
   const raw = item.createdAt || item.date;
   if (!raw) return null;
   const date = new Date(raw);
   if (Number.isNaN(date.getTime())) return null;
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+  return dayKey(date);
 }
 
-function lastMonths(count) {
+// Ҳамаи рӯзҳои моҳи ҷорӣ (1 … 28/29/30/31)
+function daysOfMonth() {
   const now = new Date();
+  const total = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
   const out = [];
-  for (let i = count - 1; i >= 0; i -= 1) {
-    const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    out.push({
-      key: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
-      label: date.toLocaleDateString("ru-RU", { month: "short" }),
-    });
+  for (let day = 1; day <= total; day += 1) {
+    const date = new Date(now.getFullYear(), now.getMonth(), day);
+    out.push({ key: dayKey(date), day, isToday: day === now.getDate() });
   }
   return out;
 }
@@ -59,16 +61,19 @@ export default function AdminOverview({ data, users }) {
     0,
   );
 
-  const months = lastMonths(6);
-  const series = months.map(({ key, label }) => ({
-    label,
-    users: users.filter((item) => monthOf(item) === key).length,
-    listings: [...products, ...lands, ...medicine].filter((item) => monthOf(item) === key).length,
+  const listings = [...products, ...lands, ...medicine];
+  const series = daysOfMonth().map(({ key, day, isToday }) => ({
+    label: day,
+    isToday,
+    users: users.filter((item) => dayOf(item) === key).length,
+    listings: listings.filter((item) => dayOf(item) === key).length,
   }));
   const peak = Math.max(...series.map((point) => Math.max(point.users, point.listings)), 1);
 
-  const last = series[series.length - 1];
-  const prev = series[series.length - 2] || { users: 0, listings: 0 };
+  // Фоиз: имрӯз нисбат ба дирӯз
+  const todayIndex = series.findIndex((point) => point.isToday);
+  const last = series[todayIndex];
+  const prev = series[todayIndex - 1] || { users: 0, listings: 0 };
   const lastTotal = last.users + last.listings;
   const prevTotal = prev.users + prev.listings;
   const growth = prevTotal > 0 ? Math.round(((lastTotal - prevTotal) / prevTotal) * 100) : null;
@@ -113,9 +118,9 @@ export default function AdminOverview({ data, users }) {
             )}
           </header>
 
-          <div className="admin-ov-chart">
+          <div className="admin-ov-chart is-daily">
             {series.map((point) => (
-              <div className="admin-ov-col" key={point.label}>
+              <div className={`admin-ov-col ${point.isToday ? "is-today" : ""}`} key={point.label}>
                 <div className="admin-ov-bars">
                   <span
                     className="admin-ov-bar is-users"
@@ -128,7 +133,7 @@ export default function AdminOverview({ data, users }) {
                     title={`${t("adminOvListings")}: ${point.listings}`}
                   />
                 </div>
-                <small>{point.label}</small>
+                <small>{point.label === 1 || point.label % 5 === 0 || point.isToday ? point.label : " "}</small>
               </div>
             ))}
           </div>

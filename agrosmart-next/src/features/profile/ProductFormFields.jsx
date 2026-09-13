@@ -3,7 +3,7 @@
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import ImagePicker from "../../components/shared/ImagePicker";
 import { useTranslation } from "../../context/language";
-import { CITIES, PRODUCT_CATEGORIES } from "../../lib/catalog";
+import { CITIES, PRODUCT_CATEGORIES, productCategoryLabel } from "../../lib/catalog";
 
 // Майдонҳои формаи маҳсулот. Ҷудо гирифта шуданд, то худи модал кӯтоҳ бошад.
 export default function ProductFormFields({ form, update }) {
@@ -34,7 +34,7 @@ export default function ProductFormFields({ form, update }) {
         <label htmlFor="product-category">{t("categoryLabel")}</label>
         <Select value={form.category} onValueChange={(v) => update("category", v)}>
           <SelectTrigger id="product-category">
-            <SelectValue />
+            <SelectValue>{productCategoryLabel(t, form.category)}</SelectValue>
           </SelectTrigger>
           <SelectContent>
             {PRODUCT_CATEGORIES.map((c) => (
