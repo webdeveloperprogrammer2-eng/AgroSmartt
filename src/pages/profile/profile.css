@@ -920,14 +920,20 @@ html[data-theme="dark"] .modal-form button[role="combobox"] {
 
 .pcard-media {
     position: relative;
+    flex-shrink: 0;
     height: 126px;
     display: grid;
     place-items: center;
+    overflow: hidden;
     background: var(--pro-surface-2);
     color: var(--pro-muted);
 }
 
+/* Расми амудӣ (масалан 720×1280) набояд аз блок берун барояд ва ном,
+   нарх ва тугмаҳои таҳрир/нест карданро пӯшонад */
 .pcard-media img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
