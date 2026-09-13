@@ -30,20 +30,28 @@ function dayOf(item) {
   return dayKey(date);
 }
 
-// Ҳамаи рӯзҳои моҳи ҷорӣ (1 … 28/29/30/31)
-function daysOfMonth() {
+// Номҳои кӯтоҳи рӯзҳои ҳафта (аз душанбе то якшанбе)
+const WEEKDAYS = {
+  tj: ["Дш", "Сш", "Чш", "Пш", "Ҷм", "Шб", "Яш"],
+  ru: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+  en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+};
+
+// 7 рӯзи ҳафтаи ҷорӣ: душанбе … якшанбе
+function daysOfWeek() {
   const now = new Date();
-  const total = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
   const out = [];
-  for (let day = 1; day <= total; day += 1) {
-    const date = new Date(now.getFullYear(), now.getMonth(), day);
-    out.push({ key: dayKey(date), day, isToday: day === now.getDate() });
+  for (let i = 0; i < 7; i += 1) {
+    const date = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + i);
+    out.push({ key: dayKey(date), weekday: i, day: date.getDate(), isToday: dayKey(date) === dayKey(now) });
   }
   return out;
 }
 
 export default function AdminOverview({ data, users }) {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const weekdayNames = WEEKDAYS[language] || WEEKDAYS.tj;
 
   const products = data.mahsulot || [];
   const lands = data.zamin || [];
@@ -62,8 +70,10 @@ export default function AdminOverview({ data, users }) {
   );
 
   const listings = [...products, ...lands, ...medicine];
-  const series = daysOfMonth().map(({ key, day, isToday }) => ({
-    label: day,
+  const series = daysOfWeek().map(({ key, weekday, day, isToday }) => ({
+    key,
+    name: weekdayNames[weekday],
+    day,
     isToday,
     users: users.filter((item) => dayOf(item) === key).length,
     listings: listings.filter((item) => dayOf(item) === key).length,
@@ -118,9 +128,9 @@ export default function AdminOverview({ data, users }) {
             )}
           </header>
 
-          <div className="admin-ov-chart is-daily">
+          <div className="admin-ov-chart is-weekly">
             {series.map((point) => (
-              <div className={`admin-ov-col ${point.isToday ? "is-today" : ""}`} key={point.label}>
+              <div className={`admin-ov-col ${point.isToday ? "is-today" : ""}`} key={point.key}>
                 <div className="admin-ov-bars">
                   <span
                     className="admin-ov-bar is-users"
@@ -133,7 +143,10 @@ export default function AdminOverview({ data, users }) {
                     title={`${t("adminOvListings")}: ${point.listings}`}
                   />
                 </div>
-                <small>{point.label === 1 || point.label % 5 === 0 || point.isToday ? point.label : " "}</small>
+                <small>
+                  {point.name}
+                  <b>{point.day}</b>
+                </small>
               </div>
             ))}
           </div>

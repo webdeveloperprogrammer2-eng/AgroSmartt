@@ -41,7 +41,8 @@ export function createResourceClient(resource) {
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        // Санаи сохташавӣ барои диаграммаи "Пешрафти сайт" лозим аст
+        body: JSON.stringify({ createdAt: new Date().toISOString(), ...data }),
       });
       return parseOrThrow(res, `Хатогӣ ҳангоми иловаи сабт ба ${resource}`);
     },

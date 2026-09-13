@@ -71,12 +71,22 @@ export function createResourceClient(resource) {
       return parseOrThrow(res, `Сабт бо ин ID дар ${resource} ёфт нашуд`);
     },
 
+    // Санаи сохташавиро худамон мегузорем — бе он диаграммаи "Пешрафти сайт"
+    // корбарон ва эълонҳои навро ҳисоб карда наметавонад.
     create(data) {
-      return sendJson(url, "POST", data, `Хатогӣ ҳангоми иловаи сабт ба ${resource}`);
+      const record = { createdAt: new Date().toISOString(), ...data };
+      return sendJson(url, "POST", record, `Хатогӣ ҳангоми иловаи сабт ба ${resource}`);
     },
 
-    update(id, data) {
-      return sendJson(`${url}/${id}`, "PUT", data, `Хатогӣ ҳангоми навсозии сабт дар ${resource}`);
+    // PUT сабтро пурра иваз мекунад, барои ҳамин санаи кӯҳнаро нигоҳ медорем
+    async update(id, data) {
+      let record = data;
+      if (data && !data.createdAt) {
+        const res = await apiFetch(`${url}/${id}`).catch(() => null);
+        const current = res?.ok ? await res.json().catch(() => null) : null;
+        if (current?.createdAt) record = { ...data, createdAt: current.createdAt };
+      }
+      return sendJson(`${url}/${id}`, "PUT", record, `Хатогӣ ҳангоми навсозии сабт дар ${resource}`);
     },
 
     patch(id, data) {
